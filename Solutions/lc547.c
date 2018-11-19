@@ -1,3 +1,6 @@
+// 4ms
+
+// O(n^2)
 int findCircleNum(int** M, int MRowSize, int MColSize) {
     int n = MRowSize;
     // int* visited = (int*)calloc(n, sizeof(int));
