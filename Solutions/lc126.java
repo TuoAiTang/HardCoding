@@ -11,11 +11,13 @@ class lc126 {
 
     	if(!wordSet.contains(endWord)) return ans;
 
-    	//remove two unnessary word
+    	//remove these two unnessary word
     	wordSet.remove(beginWord);
     	wordSet.remove(endWord);
 
     	//steps to reach the word
+    	//for: avoid missing some diffrent paths to newWord
+    	//same steps means two words in one loop
     	Map<String, Integer> steps = new HashMap<>();
     	steps.put(beginWord, 1);
 
@@ -33,14 +35,15 @@ class lc126 {
     		step ++;
     		for(int size = q.size(); size > 0; size --){
     			String orgWord = q.remove();
+                wordSet.remove(orgWord);
     			char [] wordArray = orgWord.toCharArray();
 
     			for(int i = 0; i < len; i++){
     				char c = wordArray[i];
     				for(char ch = 'a'; ch <= 'z'; ch ++){
-    					//little optimization reduce run time to 145ms beats 56.9%
+    					//little optimization reduce run time to 115ms beats 70.53%
     					if(ch == c) continue;
-    					
+
     					wordArray[i] = ch;
     					String newWord = String.valueOf(wordArray);
 
