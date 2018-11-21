@@ -1,1 +1,0 @@
-Regitedit to configure the default open method for .java file.
