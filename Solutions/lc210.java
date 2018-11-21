@@ -1,6 +1,7 @@
 import java.util.*;
 //O(V + E) ~ O(n)
 //16ms beats 50.04
+//Topologogical 
 class lc210 {
 	private Map<Integer, List<Integer>> graph = new HashMap<>();
     public int[] findOrder(int numCourses, int[][] prerequisites) {
