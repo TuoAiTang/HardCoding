@@ -1,6 +1,6 @@
 import java.util.*;
 //2ms 70% 11 cases
-class lc339 {
+class lc399 {
     public double[] calcEquation(String[][] equations, double[] values, String[][] queries) {
     	//construct the graph, g.get(A).get(B) = k, means k = A / B 
         Map<String, Map<String, Double>> graph = new HashMap<>();
