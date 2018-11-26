@@ -10,10 +10,6 @@ typedef struct {
 
 int main(){
 
-	int a = 3;
-	(*(&a))++;
-	printf("%d\n", a);
-
-	printf("I love coding!\n");
+	printf("I LOVE CODING VERY MUCH!!!!\n\n");
 	return 0;
 }
