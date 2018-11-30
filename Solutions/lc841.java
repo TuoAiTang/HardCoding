@@ -1,3 +1,6 @@
+//9ms beats 32.21%
+//Time: O(V + E)
+//Space: O(V)
 import java.util.*;
 class lc841 {
     public boolean canVisitAllRooms(List<List<Integer>> rooms) {
