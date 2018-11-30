@@ -1,29 +1,33 @@
 import java.util.*;
+//287ms beats 37.14%
 class lc882_Dijkstra {
+	class Pair{
+		int node;
+		int hp;
+		Pair(int n, int h){node = n; hp = h;}
+	}
 	//use dijkstra to find max hp for every node
     public int reachableNodes(int[][] edges, int M, int N) {
         //construct the graph
         int [][] g = new int[N][N];
         for(int [] w : g)
         	Arrays.fill(w, -1);
-        for(int i = 0; i < N; i++)
-        	g[i][i] = 0;
         for(int [] e : edges){
         	g[e[0]][e[1]] = e[2];
         	g[e[1]][e[0]] = e[2];
         }
 
-        PriorityQueue<int []> pq = new PriorityQueue<>((a, b) -> b[1] - a[1]);	//int [] -> {node, hp}
-        int [] HP = new int [N];
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> b.hp - a.hp);	//int [] -> {node, hp}
+        int [] HP = new int [N];	//Hashtable store the pair {node, max_hp}
         Arrays.fill(HP, -1);
         int ans = 0;
 
-        pq.offer(new int [] {0, M});
+        pq.offer(new Pair(0, M));
 
         while(!pq.isEmpty()){
-        	int [] cur = pq.remove();
-        	int node = cur[0];
-        	int hp = cur[1];
+        	Pair p = pq.remove();
+        	int node = p.node;
+        	int hp = p.hp;
         	if(HP[node] != -1) continue;
         	HP[node] = hp;
         	ans++;
@@ -33,7 +37,7 @@ class lc882_Dijkstra {
         			int nhp = hp - g[node][i] - 1 ;
         			if(HP[i] != -1 || nhp < 0)
         				continue;
-        			pq.offer(new int [] {i, nhp});
+        			pq.offer(new Pair(i, nhp));
         		}
         	}
         }
