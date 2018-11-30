@@ -17,17 +17,17 @@ class lc882_Dijkstra {
         dist[0] = 0;
         boolean [] collected = new boolean[N];
         int ans = 0;
-
+        //O(ElogV)
         int u = getMinVertex(dist, collected);
         while(u != -1 && dist[u] != M + 1){
         	collected[u] = true;
         	ans++;
         	for(int i = 0; i < N; i++)
-        		if(g[u][i] != -1 && !collected[i] && (dist[u] + g[u][i]) <= M)
-        			dist[i] = Math.min(dist[i], (dist[u] + g[u][i]));
+        		if(g[u][i] != -1 && !collected[i] && (dist[u] + g[u][i] + 1) <= M)
+        			dist[i] = Math.min(dist[i], (dist[u] + g[u][i] + 1));
     		u = getMinVertex(dist, collected);
         }
-
+        //O(E)
         for(int [] e : edges){
         	int uv = ((M - dist[e[0]]) < 0) ? 0 : (M - dist[e[0]]);
         	int vu = ((M - dist[e[1]]) < 0) ? 0 : (M - dist[e[1]]);
