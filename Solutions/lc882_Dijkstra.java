@@ -1,12 +1,7 @@
 import java.util.*;
-//287ms beats 37.14%
+//294ms beats 35.24%
 class lc882_Dijkstra {
-	class Pair{
-		int node;
-		int hp;
-		Pair(int n, int h){node = n; hp = h;}
-	}
-	//use dijkstra to find max hp for every node
+	//use dijkstra to find shortest path to every node which dist <= M
     public int reachableNodes(int[][] edges, int M, int N) {
         //construct the graph
         int [][] g = new int[N][N];
@@ -17,37 +12,40 @@ class lc882_Dijkstra {
         	g[e[1]][e[0]] = e[2];
         }
 
-        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> b.hp - a.hp);	//int [] -> {node, hp}
-        int [] HP = new int [N];	//Hashtable store the pair {node, max_hp}
-        Arrays.fill(HP, -1);
+        int [] dist = new int[N];
+        Arrays.fill(dist, M + 1);
+        dist[0] = 0;
+        boolean [] collected = new boolean[N];
         int ans = 0;
 
-        pq.offer(new Pair(0, M));
-
-        while(!pq.isEmpty()){
-        	Pair p = pq.remove();
-        	int node = p.node;
-        	int hp = p.hp;
-        	if(HP[node] != -1) continue;
-        	HP[node] = hp;
+        int u = getMinVertex(dist, collected);
+        while(u != -1 && dist[u] != M + 1){
+        	collected[u] = true;
         	ans++;
-        	for(int i = 0; i < N; i++){
-        		if(g[node][i] != -1){
-        			int nnode = i;
-        			int nhp = hp - g[node][i] - 1 ;
-        			if(HP[i] != -1 || nhp < 0)
-        				continue;
-        			pq.offer(new Pair(i, nhp));
-        		}
-        	}
+        	for(int i = 0; i < N; i++)
+        		if(g[u][i] != -1 && !collected[i] && (dist[u] + g[u][i]) <= M)
+        			dist[i] = Math.min(dist[i], (dist[u] + g[u][i]));
+    		u = getMinVertex(dist, collected);
         }
 
         for(int [] e : edges){
-        	int uv = (HP[e[0]] == -1) ? 0 : HP[e[0]];
-        	int vu = (HP[e[1]] == -1) ? 0 : HP[e[1]];
+        	int uv = ((M - dist[e[0]]) < 0) ? 0 : (M - dist[e[0]]);
+        	int vu = ((M - dist[e[1]]) < 0) ? 0 : (M - dist[e[1]]);
         	ans += Math.min(e[2], uv + vu);
         }
 
         return ans;
+    }
+
+    private int getMinVertex(int [] dist, boolean [] collected){
+    	int idx = -1;
+    	int min = Integer.MAX_VALUE;
+    	for(int i = 0; i < dist.length; i++){
+    		if(!collected[i] && min > dist[i]){
+    			idx = i;
+    			min = dist[i];
+    		}
+    	}
+    	return idx;
     }
 }
