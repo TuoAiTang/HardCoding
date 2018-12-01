@@ -1,3 +1,6 @@
+//566ms beats 5.94%
+//Time: O(n!)
+//Space: O(n^2) for pre-process + O(n) depth of recursion
 import java.util.*;
 class lc943_DFS_Pruning {
 	private int [] best_path;
@@ -13,10 +16,9 @@ class lc943_DFS_Pruning {
         		int lj = A[j].length();
         		os[i][j] = lj;
         		for(int k = 1; k <= Math.min(li, lj); k++){
+        			//k character in the tail of i, while the head of j
         			if(A[i].substring(li - k).equals(A[j].substring(0, k)))
         				os[i][j] = lj - k;
-        			else
-        				break;
         		}
         	}
         }
