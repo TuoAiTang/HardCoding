@@ -2,8 +2,7 @@ import java.util.*;
 class testJ{
 	
 	public static void main(String[] args) {
-		String s = "leetcode";
-		System.out.println(s.substring(3, 4));
+		System.out.println(-11 % 3);
 	}
 
 	private static void swap(String s1, String s2){
