@@ -2,7 +2,8 @@ import java.util.*;
 class testJ{
 	
 	public static void main(String[] args) {
-		System.out.println(-11 % 3);
+		String s = "12345";
+		System.out.println(s.substring(3, 3).length());
 	}
 
 	private static void swap(String s1, String s2){
