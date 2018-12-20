@@ -1,6 +1,6 @@
 /*	
 	Test Case 1: [1,1,2,3,3,4,4,8,8]
-	
+
 	l = 0, r = 9
 	mid = 4
 	n = 5
@@ -20,6 +20,9 @@
 
 */
 class lc540 {
+	//binary search
+	//Time: O(logn)
+	//0ms
     public int singleNonDuplicate(int[] nums) {
         int l = 0;
         int r = nums.length - 1;
