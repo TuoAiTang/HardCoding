@@ -1,4 +1,3 @@
-package hashtable;
 import java.util.*;
 public class lc15 {
 	public List<List<Integer>> threeSum(int[] nums) {
