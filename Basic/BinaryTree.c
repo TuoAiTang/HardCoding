@@ -199,17 +199,31 @@ void PrintMorrisTraversal(SearchTree root){
     }
 }
 
-
-int** levelOrderBottom(struct TreeNode* root, int** columnSizes, int* returnSize) {
-    
+void inorder(SearchTree t){
+	if(!t) return;
+	SearchTree* stack = (SearchTree*)malloc(100 * sizeof(SearchTree));
+	int top = -1;
+	stack[++top] = t;
+	SearchTree p = t;
+	while(top != -1){
+		while(p->left){
+			p = p->left;
+			stack[++top] = p;
+		}
+		while(top != -1){
+			printf("%d\n", stack[top--]->val);
+			if(p->right){
+				stack[++top] = p->right;
+				break;
+			}
+		}
+	}
 }
-
-
 
 int main(){
 
 	int a[] = {5,4,3,2,1};
-	SearchTree T1 = NULL, T2 = NULL, T3 = NULL;
+	SearchTree T1 = NULL, T2 = NULL;
 	for (int i = 0; i < 5; ++i)
 		T1 = insert(a[i], T1);
 	for (int i = 0; i < 7; ++i)
@@ -226,11 +240,13 @@ int main(){
 
 	// printf("isSameTree:%d\n", isSameTree(T1, T2));
 
-	int size;
-	int* res = inorderTraversalByStack(T1, &size);
-	for (int i = 0; i < size; ++i)
-		printf("%d\t", res[i]);
-	free(res);
+	// int size;
+	// int* res = inorderTraversalByStack(T1, &size);
+	// for (int i = 0; i < size; ++i)
+	// 	printf("%d\t", res[i]);
+	// free(res);
+
+	inorder(T1);
 
 	// inorderTraversalByStack(T1);
 
