@@ -1,26 +1,23 @@
 import java.util.*;
-class testJ{
-	
+class testJ{	
 	public static void main(String[] args) {
-		Pair [] p = {new Pair(1, 2)};
-
-
+		int [] c = new int [1];
+		Arrays.fill(c, 1);
+		System.out.println(hIndex(c));
 	}
 
-	private static void swap(String s1, String s2){
-		String tmp = s1;
-		s1 = s2;
-		s2 = tmp;
-	}
-
-	static class Pair{
-		int a;
-		int b;
-		public Pair(int a, int b){
-			this.a = a;
-			this.b = b;
-		}
-	}
+	public static int hIndex(int[] citations) {
+        int n = citations.length;
+        int [] bucket = new int [n + 1];
+        for(int c : citations)
+            bucket[Math.min(c, n)]++;
+        int sum = 0;
+        for(int i = n; i >= 0; i--){
+            sum += bucket[i];
+            if(sum >= i)
+                return i;
+        }
+        return 0;
+    }
 }
-
 

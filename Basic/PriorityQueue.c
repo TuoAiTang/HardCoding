@@ -43,6 +43,7 @@ void destroy(PriorityQueue pq){
 	printf("Success: destroy the heap!\n");
 }
 
+//O(log(pq->size))
 void insert(PriorityQueue pq, ElementType elem){
 	if(isFull(pq)){
 		printf("Error: insert to a full heap!\n");
@@ -89,7 +90,7 @@ ElementType deleteMin(PriorityQueue pq){
 
 ElementType findMin(PriorityQueue pq){
 	if(isEmpty(pq)){
-		printf("Error: deleteMin of an empty heap!\n");
+		printf("Error: findMin of an empty heap!\n");
 		return pq->elements[0];
 	}
 	printf("Success: find the min element: %d\n", pq->elements[1]);
